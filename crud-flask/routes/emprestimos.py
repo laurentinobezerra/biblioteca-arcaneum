@@ -145,5 +145,5 @@ def ranking_leitores():
     for emprestimo in Emprestimo.query.all():
         estatisticas[emprestimo.id_leitor] += 1
     id_leitores = {leitor.id_leitor: leitor.nome for leitor in Leitor.query.all()}
-    dados_mapeados = {id_leitores.get(k, "Desconhecido"): v for k, v in estatisticas.items()}
+    dados_mapeados = {id_leitores.get(k, "Desconhecido"): v for k, v in estatisticas.most_common()}
     return render_template("ranking_leitores.html", leitores_ativos=dados_mapeados)
