@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Livro</title>
+</head>
+<body>
+    <h1>Editar Livro</h1>
+    <form action="/livros/update/{{ livro.id_livro }}" method="POST">
+        <label>Título:</label>
+        <input type="text" name="titulo" value="{{ livro.titulo }}" required><br>
+
+        <label>Autor:</label>
+        <input type="text" name="autor" value="{{ livro.autor }}" required><br>
+
+        <label>Editora:</label>
+        <input type="text" name="editora" value="{{ livro.editora }}"><br>
+
+        <label>Ano de Publicação:</label>
+        <input type="number" name="ano_publicacao" value="{{ livro.ano_publicacao }}"><br>
+
+        <label>Categoria:</label>
+        <select name="id_categoria" required>
+            {% for categoria in categorias %}
+                <option value="{{ categoria.id_categoria }}" {% if categoria.id_categoria == livro.id_categoria %}selected{% endif %}>
+                    {{ categoria.nome_categoria }}
+                </option>
+            {% endfor %}
+        </select><br>
+
+        <button type="submit">Salvar</button>
+    </form>
+    <a href="/livros">Cancelar</a>
+</body>
+</html>

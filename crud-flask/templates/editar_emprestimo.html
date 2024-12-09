@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Empréstimo</title>
+</head>
+<body>
+    <h1>Editar Empréstimo</h1>
+    
+    {% if mensagem %}
+        <p style="color: red;">{{ mensagem }}</p>
+    {% endif %}
+
+    <form action="/emprestimos/update/{{ emprestimo.id_emprestimo }}" method="POST">
+        <label for="data_emprestimo">Data do Empréstimo:</label>
+        <input type="date" name="data_emprestimo" value="{{ emprestimo.data_emprestimo }}" required><br><br>
+
+        <label for="data_devolucao">Data de Devolução:</label>
+        <input type="date" name="data_devolucao" value="{{ emprestimo.data_devolucao }}"><br><br>
+
+        <label for="id_leitor">Leitor:</label>
+        <select name="id_leitor" required>
+            {% for leitor in leitores %}
+                <option value="{{ leitor.id_leitor }}" {% if leitor.id_leitor == emprestimo.id_leitor %}selected{% endif %}>
+                    {{ leitor.nome }}
+                </option>
+            {% endfor %}
+        </select><br><br>
+
+        <label for="id_livro">Livro:</label>
+        <select name="id_livro" required>
+            {% for livro in livros %}
+                <option value="{{ livro.id_livro }}" {% if livro.id_livro == emprestimo.id_livro %}selected{% endif %}>
+                    {{ livro.titulo }}
+                </option>
+            {% endfor %}
+        </select><br><br>
+        
+        <button type="submit">Salvar</button>
+        <a href="/emprestimos">Cancelar</a>
+    </form>
+</body>
+</html>

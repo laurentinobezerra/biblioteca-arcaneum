@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Leitor</title>
+</head>
+<body>
+    <h1>Editar Leitor</h1>
+    <form action="/leitores/update/{{ leitor.id_leitor }}" method="POST">
+        <label for="nome">Nome:</label>
+        <input type="text" name="nome" value="{{ leitor.nome }}" required><br>
+
+        <label for="cpf">CPF:</label>
+        <input type="text" name="cpf" value="{{ leitor.cpf }}" required><br>
+
+        <label for="email">Email:</label>
+        <input type="email" name="email" value="{{ leitor.email }}" required><br>
+
+        <label for="telefone">Telefone:</label>
+        <input type="text" name="telefone" value="{{ leitor.telefone }}"><br>
+
+        <button type="submit">Salvar</button>
+    </form>
+    <a href="/leitores">Cancelar</a>
+</body>
+</html>

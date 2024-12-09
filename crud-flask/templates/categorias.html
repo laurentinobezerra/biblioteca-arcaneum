@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciar Categorias</title>
+</head>
+<body>
+    <h1>Adicionar Categoria</h1>
+    {% if mensagem %}
+        <p style="color: red;">{{ mensagem }}</p>
+    {% endif %}
+    <form action="/categorias/create" method="post">
+        <input type="text" name="nome_categoria" placeholder="Digite o nome da categoria" required>
+        <button type="submit">Adicionar</button>
+    </form>
+
+    <h1>Lista de Categorias</h1>
+    {% if mensagem2 %}
+        <p style="color: red;">{{ mensagem2 }}</p>
+    {% endif %}
+    <table border="1" cellpadding="5" cellspacing="0">
+        <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>Ações</th>
+        </tr>
+        {% for categoria in categorias %}
+        <tr>
+            <td>{{categoria.id_categoria}}</td>
+            <td>
+                <form action="/categorias/update/{{categoria.id_categoria}}" method="POST">
+                    <input type="text" name="nome_categoria" value="{{categoria.nome_categoria}}" required>
+                    <button type="submit">Atualizar</button>
+                </form>
+            </td>
+            <td>
+                <form action="/categorias/delete/{{categoria.id_categoria}}" method="POST">
+                    <button type="submit">Excluir</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    <a href="/">Voltar</a>
+</body>
+</html>

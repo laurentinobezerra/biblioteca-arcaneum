@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciar Livros</title>
+</head>
+<body>
+    <h1>Adicionar Livro</h1>
+    <form action="/livros/create" method="post">
+        <input type="text" name="titulo" placeholder="Informe o título" required>
+        <input type="text" name="autor" placeholder="Informe o autor" required>
+        <input type="text" name="editora" placeholder="Informe a editora">
+        <input type="number" name="ano_publicacao" placeholder="Informe o ano de publicação">
+        <select name="id_categoria" required>
+            {% for categoria in categorias %}
+                <option value="{{ categoria.id_categoria }}">{{ categoria.nome_categoria }}</option>
+            {% endfor %}
+        </select>
+        <button type="submit">Adicionar</button>
+    </form>
+    
+    <h1>Lista de Livros</h1>
+    <table border="1" cellpadding="5" cellspacing="0">
+        <tr>
+            <th>ID</th>
+            <th>Título</th>
+            <th>Categoria</th>
+            <th>Autor</th>
+            <th>Editora</th>
+            <th>Ano de Publicação</th>
+            <th>Ações</th>
+        </tr>
+        {% for livro in livros %}
+        <tr>
+            <td>{{ livro.id_livro }}</td>
+            <td>{{ livro.titulo }}</td>
+            <td>{{ livro.categoria.nome_categoria }}</td>
+            <td>{{ livro.autor }}</td>
+            <td>{{ livro.editora }}</td>
+            <td>{{ livro.ano_publicacao }}</td>
+            <td>
+                <form action="/livros/edit/{{ livro.id_livro }}" method="GET">
+                    <button type="submit">Editar</button>
+                </form>
+                <form action="/livros/delete/{{ livro.id_livro }}" method="POST">
+                    <button type="submit">Excluir</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    <a href="/">Voltar</a>
+</body>
+</html>

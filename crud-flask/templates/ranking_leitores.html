@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leitores Mais Ativos</title>
+</head>
+<body>
+    <h1>🏆 Ranking de Leitores Mais Ativos 🏆</h1>
+    
+    {% if leitores_ativos %}
+    <table border="1" cellpadding="5" cellspacing="0">
+        <tr>
+            <th>Nome</th>
+            <th>Quantidade de Empréstimos</th>
+            <th>Medalha</th>
+        </tr>
+        {% for nome, qtd in leitores_ativos.items() %}
+            <tr>
+                <td>{{ nome }}</td>
+                <td>{{ qtd }}</td>
+                <td>
+                    {% if loop.index == 1 %}
+                        🥇
+                    {% elif loop.index == 2 %}
+                        🥈
+                    {% elif loop.index == 3 %}
+                        🥉
+                    {% else %}
+                        -
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+    {% else %}
+        <p style="color: red;">Nenhum dado disponível para exibição.</p>
+    {% endif %}
+    
+    <br>
+    <a href="/">Voltar</a>
+</body>
+</html>

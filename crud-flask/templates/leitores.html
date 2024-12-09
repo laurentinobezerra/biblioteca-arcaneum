@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciar Leitores</title>
+</head>
+<body>
+    <h1>Adicionar Leitor</h1>
+    {% if mensagem %}
+        <p style="color: red;">{{ mensagem }}</p>
+    {% endif %}
+    <form action="/leitores/create" method="post">
+        <input type="text" name="nome" placeholder="Informe o nome" required>
+        <input type="text" name="cpf" placeholder="Informe o CPF" maxlength="11" required pattern="\d{11}">
+        <input type="email" name="email" placeholder="Informe o email" required>
+        <input type="text" name="telefone" placeholder="Informe o telefone" maxlength="11" pattern="\d{11}">
+        <button type="submit">Adicionar</button>
+    </form>
+
+    <h1>Lista de Leitores</h1>
+    <table border="1" cellpadding="5" cellspacing="0">
+        <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>CPF</th>
+            <th>Email</th>
+            <th>Telefone</th>
+            <th>Ações</th>
+        </tr>
+        {% for leitor in leitores %}
+        <tr>
+            <td>{{ leitor.id_leitor }}</td>
+            <td>{{ leitor.nome }}</td>
+            <td>{{ leitor.cpf }}</td>
+            <td>{{ leitor.email }}</td>
+            <td>{{ leitor.telefone }}</td>
+            <td>
+                <form action="/leitores/edit/{{ leitor.id_leitor }}" method="GET">
+                    <button type="submit">Editar</button>
+                </form>
+                <form action="/leitores/delete/{{ leitor.id_leitor }}" method="POST">
+                    <button type="submit">Excluir</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    <a href="/">Voltar</a>
+</body>
+</html>
